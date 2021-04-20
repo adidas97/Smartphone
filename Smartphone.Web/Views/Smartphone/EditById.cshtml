@@ -1,0 +1,24 @@
+﻿
+@model CreateSmartphoneViewModel
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<form method="post">
+    <div
+    <label asp-for="NameOfAdvertisement"></label>
+    <input asp-for="NameOfAdvertisement" />
+    </div>
+    <div
+    <label asp-for="Price"></label>
+  <input asp-for="Price" />
+    </div>
+
+
+
+    <label asp-for="Description"></label>
+<textarea asp-for="Description"> </textarea>
+
+    <input type="submit" value="sub" />
+
+</form>

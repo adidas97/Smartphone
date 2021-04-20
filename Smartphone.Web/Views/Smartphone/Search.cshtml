@@ -1,0 +1,140 @@
+﻿@using Smartphone.Services.Models
+@model SmartphoneSearchModell
+
+@{
+    ViewData["Title"] = "Search";
+}
+<form method="post">
+    <label asp-for="PriceFrom">Price From</label>
+    <input asp-for="PriceFrom" />
+    <label asp-for="PriceTo">Price To</label>
+    <input asp-for="PriceTo" />
+
+    <label asp-for="SizeDisplayFrom">Size Display (inch) From</label>
+    <input asp-for="SizeDisplayFrom" placeholder="0" />
+    <label asp-for="SizeDisplayTo">Size Display (inch) To</label>
+    <input asp-for="SizeDisplayTo" placeholder="7.0" />
+
+    <label asp-for="BackCameraMpFrom">Back Camera (MP) From</label>
+    <input asp-for="BackCameraMpFrom" />
+    <label asp-for="BackCameraMpTo">Back Camera (MP) To</label>
+    <input asp-for="BackCameraMpTo" />
+
+    <label asp-for="BatteryCapacitetyFrom">Battery Capacitety (mAh) From</label>
+    <input asp-for="BatteryCapacitetyFrom" />
+    <label asp-for="BatteryCapacitetyTo">Battery Capacitety (mAh) To</label>
+    <input asp-for="BatteryCapacitetyTo" />
+
+    <select id="MakeId" asp-for="MakeId" asp-items='@(new SelectList(ViewBag.Makes,"MakeId","NameOfMake"))'>
+
+        <option>Select Make</option>
+
+    </select>
+
+    <select id="ModelId" asp-for="ModelId" asp-items='@(new SelectList(string.Empty,"ModelId","NameOfModel"))'></select>
+    <h3>RAM Memory:</h3>
+    <div>
+
+        <input name="RamAreChecked" type="checkbox" value="1" />
+        <label>1 GB</label>
+    </div>
+    <div>
+
+        <input name="RamAreChecked" type="checkbox" value="2" />
+        <label>2 GB</label>
+    </div>
+    <div>
+
+        <input name="RamAreChecked" type="checkbox" value="3" />
+        <label>3 GB</label>
+    </div>
+    <div>
+
+        <input name="RamAreChecked" type="checkbox" value="4" />
+        <label>4 GB</label>
+    </div>
+    <div>
+
+        <input name="RamAreChecked" type="checkbox" value="5" />
+        <label>5 GB</label>
+    </div>
+    <div>
+
+        <input name="RamAreChecked" type="checkbox" value="6" />
+        <label>6 GB</label>
+    </div>
+    <div>
+
+        <input name="RamAreChecked" type="checkbox" value="8" />
+        <label>8 GB</label>
+    </div>
+
+    <h3>Main Memory:</h3>
+    <div>
+
+        <input name="MemoryAreChecked" type="checkbox" value="4" />
+        <label>4 GB</label>
+    </div>
+    <div>
+
+        <input name="MemoryAreChecked" type="checkbox" value="6" />
+        <label>6 GB</label>
+    </div>
+    <div>
+
+        <input name="MemoryAreChecked" type="checkbox" value="8" />
+        <label>8 GB</label>
+    </div>
+    <div>
+
+        <input name="MemoryAreChecked" type="checkbox" value="16" />
+        <label>16 GB</label>
+    </div>
+    <div>
+
+        <input name="MemoryAreChecked" type="checkbox" value="32" />
+        <label>32 GB</label>
+    </div>
+    <div>
+
+        <input name="MemoryAreChecked" type="checkbox" value="64" />
+        <label>64 GB</label>
+    </div>
+    <div>
+
+        <input name="MemoryAreChecked" type="checkbox" value="128" />
+        <label>128 GB</label>
+    </div>
+    <div>
+
+        <input name="MemoryAreChecked" type="checkbox" value="256" />
+        <label>256 GB</label>
+    </div>
+    <div>
+
+        <input name="MemoryAreChecked" type="checkbox" value="512" />
+        <label>512 GB</label>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script>
+        $(function () {
+            $("#MakeId").change(function () {
+
+                var url = "/Smartphone/GetModels";
+                var ddlsource = "#MakeId";
+                $.getJSON(url, { MakeId: $(ddlsource).val() }, function (data) {
+                    var items = '';
+                    $("#ModelId").empty();
+                    $.each(data, function (i, row) {
+                        items += "<option value='" + row.value + "'>" + row.text + "</option>";
+                    });
+                    $("#ModelId").html(items);
+                })
+            });
+        });
+    </script>
+
+    <input type="submit" value="sub" />
+
+</form>

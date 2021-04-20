@@ -1,0 +1,14 @@
+C:\Users\adida\source\repos\Smartphone.Web\Smartphone.Services\obj\Debug\netcoreapp2.1\Smartphone.Services.csprojAssemblyReference.cache
+C:\Users\adida\source\repos\Smartphone.Web\Smartphone.Services\obj\Debug\netcoreapp2.1\Smartphone.Services.csproj.CoreCompileInputs.cache
+C:\Users\adida\source\repos\Smartphone.Web\Smartphone.Services\obj\Debug\netcoreapp2.1\Smartphone.Services.AssemblyInfoInputs.cache
+C:\Users\adida\source\repos\Smartphone.Web\Smartphone.Services\obj\Debug\netcoreapp2.1\Smartphone.Services.AssemblyInfo.cs
+C:\Users\adida\source\repos\Smartphone.Web\Smartphone.Services\bin\Debug\netcoreapp2.1\Smartphone.Services.deps.json
+C:\Users\adida\source\repos\Smartphone.Web\Smartphone.Services\bin\Debug\netcoreapp2.1\Smartphone.Services.dll
+C:\Users\adida\source\repos\Smartphone.Web\Smartphone.Services\bin\Debug\netcoreapp2.1\Smartphone.Services.pdb
+C:\Users\adida\source\repos\Smartphone.Web\Smartphone.Services\bin\Debug\netcoreapp2.1\Smartphone.Data.dll
+C:\Users\adida\source\repos\Smartphone.Web\Smartphone.Services\bin\Debug\netcoreapp2.1\Smartphone.Data.pdb
+C:\Users\adida\source\repos\Smartphone.Web\Smartphone.Services\obj\Debug\netcoreapp2.1\Smartphone.Services.csproj.CopyComplete
+C:\Users\adida\source\repos\Smartphone.Web\Smartphone.Services\obj\Debug\netcoreapp2.1\Smartphone.Services.dll
+C:\Users\adida\source\repos\Smartphone.Web\Smartphone.Services\obj\Debug\netcoreapp2.1\Smartphone.Services.pdb
+C:\Users\adida\source\repos\Smartphone.Web\Smartphone.Services\bin\Debug\netcoreapp2.1\Microsoft.AspNetCore.Mvc.Core.dll
+C:\Users\adida\source\repos\Smartphone.Web\Smartphone.Services\bin\Debug\netcoreapp2.1\Microsoft.AspNetCore.Mvc.Core.xml

@@ -1,0 +1,15 @@
+﻿@using Smartphone.Data.Models
+@model ApplicationUser
+@{
+    ViewData["Title"] = "Index";
+}
+
+<a href="/User/GetSmartphonesByUserId/@Model.Id" >Check @Model.UserName's Smartphones</a>
+
+@Model.City
+@Model.FirstName
+@Model.LastName
+@Model.PhoneNumber
+
+
+

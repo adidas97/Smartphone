@@ -1,0 +1,9 @@
+C:\Users\adida\source\repos\Smartphone.Web\Smartphone.Data\bin\Debug\netcoreapp2.1\Smartphone.Data.deps.json
+C:\Users\adida\source\repos\Smartphone.Web\Smartphone.Data\bin\Debug\netcoreapp2.1\Smartphone.Data.dll
+C:\Users\adida\source\repos\Smartphone.Web\Smartphone.Data\obj\Debug\netcoreapp2.1\Smartphone.Data.csprojAssemblyReference.cache
+C:\Users\adida\source\repos\Smartphone.Web\Smartphone.Data\obj\Debug\netcoreapp2.1\Smartphone.Data.csproj.CoreCompileInputs.cache
+C:\Users\adida\source\repos\Smartphone.Web\Smartphone.Data\obj\Debug\netcoreapp2.1\Smartphone.Data.AssemblyInfoInputs.cache
+C:\Users\adida\source\repos\Smartphone.Web\Smartphone.Data\obj\Debug\netcoreapp2.1\Smartphone.Data.AssemblyInfo.cs
+C:\Users\adida\source\repos\Smartphone.Web\Smartphone.Data\bin\Debug\netcoreapp2.1\Smartphone.Data.pdb
+C:\Users\adida\source\repos\Smartphone.Web\Smartphone.Data\obj\Debug\netcoreapp2.1\Smartphone.Data.dll
+C:\Users\adida\source\repos\Smartphone.Web\Smartphone.Data\obj\Debug\netcoreapp2.1\Smartphone.Data.pdb
