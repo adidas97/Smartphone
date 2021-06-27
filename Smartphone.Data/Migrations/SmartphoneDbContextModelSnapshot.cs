@@ -15,7 +15,7 @@ namespace Smartphone.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.8-servicing-32085")
+                .HasAnnotation("ProductVersion", "2.1.14-servicing-32113")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -133,7 +133,78 @@ namespace Smartphone.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("Smartphone.Data.Models.ApplicationUser", b =>
+            modelBuilder.Entity("Smartphone.Data.Models.Advertisement", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Description");
+
+                    b.Property<bool>("Image1");
+
+                    b.Property<bool>("Image2");
+
+                    b.Property<int>("MakeId");
+
+                    b.Property<int>("ModelId");
+
+                    b.Property<string>("Name");
+
+                    b.Property<decimal>("Price");
+
+                    b.Property<string>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MakeId");
+
+                    b.HasIndex("ModelId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Advertisements");
+                });
+
+            modelBuilder.Entity("Smartphone.Data.Models.Make", b =>
+                {
+                    b.Property<int>("MakeId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("MakeId");
+
+                    b.ToTable("Makes");
+                });
+
+            modelBuilder.Entity("Smartphone.Data.Models.Model", b =>
+                {
+                    b.Property<int>("ModelId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("BasicCamera");
+
+                    b.Property<int?>("MakeId");
+
+                    b.Property<int>("Memory");
+
+                    b.Property<int>("ModelYear");
+
+                    b.Property<string>("Name");
+
+                    b.Property<int>("RAM");
+
+                    b.HasKey("ModelId");
+
+                    b.HasIndex("MakeId");
+
+                    b.ToTable("Models");
+                });
+
+            modelBuilder.Entity("Smartphone.Data.Models.User", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
@@ -192,196 +263,6 @@ namespace Smartphone.Data.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("Smartphone.Data.Models.Charachteristic", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("BackCamera");
-
-                    b.Property<string>("Battery");
-
-                    b.Property<int>("BuiltInMemory");
-
-                    b.Property<int>("CapacityOfBattery");
-
-                    b.Property<int>("FrontCamera");
-
-                    b.Property<bool>("HasFinger");
-
-                    b.Property<bool>("HasTwoSim");
-
-                    b.Property<double>("Height");
-
-                    b.Property<string>("Model");
-
-                    b.Property<int>("ModelYear");
-
-                    b.Property<string>("Network");
-
-                    b.Property<string>("Processor");
-
-                    b.Property<int>("RAM");
-
-                    b.Property<double>("SizeInInches");
-
-                    b.Property<string>("SlotForMemory");
-
-                    b.Property<double>("Thickness");
-
-                    b.Property<string>("TypeOfSim");
-
-                    b.Property<double>("Weight");
-
-                    b.Property<double>("Width");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Charachteristics");
-                });
-
-            modelBuilder.Entity("Smartphone.Data.Models.Make", b =>
-                {
-                    b.Property<int>("MakeId")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("NameOfMake");
-
-                    b.HasKey("MakeId");
-
-                    b.ToTable("Makes");
-                });
-
-            modelBuilder.Entity("Smartphone.Data.Models.Model", b =>
-                {
-                    b.Property<int>("ModelId")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("BackCamera");
-
-                    b.Property<string>("Battery");
-
-                    b.Property<int>("BuiltInMemory");
-
-                    b.Property<int>("CapacityOfBattery");
-
-                    b.Property<int>("FrontCamera");
-
-                    b.Property<bool>("HasFinger");
-
-                    b.Property<bool>("HasTwoSim");
-
-                    b.Property<double>("Height");
-
-                    b.Property<int?>("MakeId");
-
-                    b.Property<int>("ModelYear");
-
-                    b.Property<string>("NameOfModel");
-
-                    b.Property<string>("Network");
-
-                    b.Property<string>("Processor");
-
-                    b.Property<int>("RAM");
-
-                    b.Property<double>("SizeInInches");
-
-                    b.Property<string>("SlotForMemory");
-
-                    b.Property<double>("Thickness");
-
-                    b.Property<string>("TypeOfSim");
-
-                    b.Property<double>("Weight");
-
-                    b.Property<double>("Width");
-
-                    b.HasKey("ModelId");
-
-                    b.HasIndex("MakeId");
-
-                    b.ToTable("Models");
-                });
-
-            modelBuilder.Entity("Smartphone.Data.Models.Telephone", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("BackCamera");
-
-                    b.Property<string>("Battery");
-
-                    b.Property<int>("BuiltInMemory");
-
-                    b.Property<int>("CapacityOfBattery");
-
-                    b.Property<string>("Description");
-
-                    b.Property<int>("FrontCamera");
-
-                    b.Property<bool>("HasFinger");
-
-                    b.Property<bool>("HasTwoSim");
-
-                    b.Property<double>("Height");
-
-                    b.Property<bool>("Image1");
-
-                    b.Property<bool>("Image2");
-
-                    b.Property<bool>("Image3");
-
-                    b.Property<bool>("Image4");
-
-                    b.Property<bool>("Image5");
-
-                    b.Property<int>("MakeId");
-
-                    b.Property<int>("ModelId");
-
-                    b.Property<int>("ModelYear");
-
-                    b.Property<string>("NameOfAdvertisement");
-
-                    b.Property<string>("Network");
-
-                    b.Property<decimal>("Price");
-
-                    b.Property<string>("Processor");
-
-                    b.Property<int>("RAM");
-
-                    b.Property<double>("SizeInInches");
-
-                    b.Property<string>("SlotForMemory");
-
-                    b.Property<double>("Thickness");
-
-                    b.Property<string>("TypeOfSim");
-
-                    b.Property<string>("UserId");
-
-                    b.Property<double>("Weight");
-
-                    b.Property<double>("Width");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("MakeId");
-
-                    b.HasIndex("ModelId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Telephones");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole")
@@ -392,7 +273,7 @@ namespace Smartphone.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("Smartphone.Data.Models.ApplicationUser")
+                    b.HasOne("Smartphone.Data.Models.User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -400,7 +281,7 @@ namespace Smartphone.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("Smartphone.Data.Models.ApplicationUser")
+                    b.HasOne("Smartphone.Data.Models.User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -413,7 +294,7 @@ namespace Smartphone.Data.Migrations
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("Smartphone.Data.Models.ApplicationUser")
+                    b.HasOne("Smartphone.Data.Models.User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -421,20 +302,13 @@ namespace Smartphone.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("Smartphone.Data.Models.ApplicationUser")
+                    b.HasOne("Smartphone.Data.Models.User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Smartphone.Data.Models.Model", b =>
-                {
-                    b.HasOne("Smartphone.Data.Models.Make", "Make")
-                        .WithMany("Models")
-                        .HasForeignKey("MakeId");
-                });
-
-            modelBuilder.Entity("Smartphone.Data.Models.Telephone", b =>
+            modelBuilder.Entity("Smartphone.Data.Models.Advertisement", b =>
                 {
                     b.HasOne("Smartphone.Data.Models.Make", "Make")
                         .WithMany()
@@ -446,9 +320,16 @@ namespace Smartphone.Data.Migrations
                         .HasForeignKey("ModelId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("Smartphone.Data.Models.ApplicationUser", "User")
-                        .WithMany("Telephones")
+                    b.HasOne("Smartphone.Data.Models.User", "User")
+                        .WithMany("Advertisements")
                         .HasForeignKey("UserId");
+                });
+
+            modelBuilder.Entity("Smartphone.Data.Models.Model", b =>
+                {
+                    b.HasOne("Smartphone.Data.Models.Make", "Make")
+                        .WithMany("Models")
+                        .HasForeignKey("MakeId");
                 });
 #pragma warning restore 612, 618
         }

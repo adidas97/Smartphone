@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Dynamic;
-using System.IO;
-using System.Linq;
+﻿using System.IO;
 using System.Security.Claims;
-using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -14,16 +10,15 @@ using Smartphone.Services.IServices;
 using Smartphone.Services.Models;
 using Smartphone.Web.Models;
 
-
 namespace Smartphone.Web.Controllers
 {
     public class SmartphoneController : Controller
     {
-        private readonly ICreateSmartphoneService service;
+        private readonly ISmartphoneService service;
         private readonly IHostingEnvironment env;
         private readonly IHttpContextAccessor http;
 
-        public SmartphoneController(IHttpContextAccessor http,ICreateSmartphoneService service,IHostingEnvironment env)
+        public SmartphoneController(IHttpContextAccessor http,ISmartphoneService service,IHostingEnvironment env)
         {
             this.service = service;
             this.env = env;
@@ -33,8 +28,8 @@ namespace Smartphone.Web.Controllers
         {
             return View();
         }
-
-        public IActionResult CreateSmartphone()
+        [Authorize]
+        public IActionResult CreateAdvertisement()
         {
             var makes = service.GetMakes();
 
@@ -47,12 +42,11 @@ namespace Smartphone.Web.Controllers
 
             var models = service.GetModels(MakeId);
 
-            return Json(new SelectList(models, "ModelId", "NameOfModel"));
-
+            return Json(new SelectList(models, "ModelId", "Name"));
         }
 
         [HttpPost]
-        public  IActionResult CreateSmartphone(CreateSmartphoneViewModel model)
+        public  IActionResult CreateAdvertisement(CreateAdvertisementViewModel model)
         {
             bool[] array = new bool[6];
            
@@ -66,44 +60,29 @@ namespace Smartphone.Web.Controllers
                 array[2] = true;
             }
             
-            if (model.Image3 != null)
-            {
-                array[3] = true;
-            }
-            
-            if (model.Image4 != null)
-            {
-                array[4] = true;
-            }
-            
-            if (model.Image5 != null)
-            {
-                array[5] = true;
-            }
-
-            string userid = http.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            int make = model.MakeId;
-            int modeltel = model.ModelId;
+            string userId = http.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            int makeId = model.MakeId;
+            int modelId = model.ModelId;
 
             string path = env.WebRootPath + "/files/";
-            bool existUserFolder = System.IO.Directory.Exists(path + userid);
+            bool existUserFolder = System.IO.Directory.Exists(path + userId);
             if(!existUserFolder)
             {
-                var folderpath = path + userid +"/";
+                var folderpath = path + userId + "/";
                 System.IO.Directory.CreateDirectory(folderpath);
 
-                bool existMakeFolder = System.IO.Directory.Exists(folderpath + make );
+                bool existMakeFolder = System.IO.Directory.Exists(folderpath + makeId);
 
                 if(!existMakeFolder)
                 {
-                    var folderpathh = folderpath + make+"/";
+                    var folderpathh = folderpath + makeId + "/";
                     System.IO.Directory.CreateDirectory(folderpathh);
 
-                    bool existModelFolder = System.IO.Directory.Exists(folderpathh + modeltel);
+                    bool existModelFolder = System.IO.Directory.Exists(folderpathh + modelId);
 
                     if(!existModelFolder)
                     {
-                        var folderpathhh = folderpathh + modeltel +"/";
+                        var folderpathhh = folderpathh + modelId + "/";
                         System.IO.Directory.CreateDirectory(folderpathhh);
                         for (int i = 1; i <= 5; i++)
                         {
@@ -113,27 +92,24 @@ namespace Smartphone.Web.Controllers
                                 using (var stream = new FileStream(file, FileMode.Create))
                                 {
                                     Upload(i, stream, model);
-
                                 }}
                         } }} 
                 }else
             {
 
-                var folderpath = path + userid + "/";
+                var folderpath = path + userId + "/";
                 
-
-                bool existMakeFolder = System.IO.Directory.Exists(folderpath + make);
+                bool existMakeFolder = System.IO.Directory.Exists(folderpath + makeId);
 
                 if (existMakeFolder)
                 {
-                    var folderpathh = folderpath + make + "/";
+                    var folderpathh = folderpath + makeId + "/";
                     
-
-                    bool existModelFolder = System.IO.Directory.Exists(folderpathh + modeltel);
+                    bool existModelFolder = System.IO.Directory.Exists(folderpathh + modelId);
 
                     if (!existModelFolder)
                     {
-                        var folderpathhh = folderpathh + modeltel + "/";
+                        var folderpathhh = folderpathh + modelId + "/";
                         System.IO.Directory.CreateDirectory(folderpathhh);
                         for (int i = 1; i <= 5; i++)
                         {
@@ -143,7 +119,6 @@ namespace Smartphone.Web.Controllers
                                 using (var stream = new FileStream(file, FileMode.Create))
                                 {
                                     Upload(i, stream, model);
-
                                 }
                             }
                         }
@@ -151,14 +126,14 @@ namespace Smartphone.Web.Controllers
 
                 } else
                 {
-                    var folderpathh = folderpath + make + "/";
+                    var folderpathh = folderpath + makeId + "/";
                     System.IO.Directory.CreateDirectory(folderpathh);
 
-                    bool existModelFolder = System.IO.Directory.Exists(folderpathh + modeltel);
+                    bool existModelFolder = System.IO.Directory.Exists(folderpathh + modelId);
 
                     if (!existModelFolder)
                     {
-                        var folderpathhh = folderpathh + modeltel + "/";
+                        var folderpathhh = folderpathh + modelId + "/";
                         System.IO.Directory.CreateDirectory(folderpathhh);
                         for (int i = 1; i <= 5; i++)
                         {
@@ -168,13 +143,12 @@ namespace Smartphone.Web.Controllers
                                 using (var stream = new FileStream(file, FileMode.Create))
                                 {
                                    Upload(i, stream, model);
-
                                 }
                             }
                         }
                     } else
                     {
-                        var folderpathhh = folderpathh + modeltel + "/";
+                        var folderpathhh = folderpathh + modelId + "/";
                         
                         var file = folderpathhh + "1.jpg";
                         using (var stream = new FileStream(file, FileMode.Create))
@@ -183,33 +157,25 @@ namespace Smartphone.Web.Controllers
                         }
                     }
                 }
-
             }
            
-            
-            var telephone = new Telephone
+            var ad = new Advertisement
             {
                 MakeId = model.MakeId,
                 Image1 = array[1],
                 Image2 = array[2],
-                Image3 = array[3],
-                Image4 = array[4],
-                Image5 = array[5],
                 ModelId = model.ModelId,
                 Price = model.Price,
                 Description = model.Description,
-                NameOfAdvertisement = model.NameOfAdvertisement
-                
+                Name = model.Name
             };
+            service.CreateAdvertisement(ad);
 
-            service.CreateSmartphone(telephone);
-
-            return RedirectToAction(nameof(CurrentUserAdvertisement));
+            return RedirectToAction(nameof(CurrentUserAdvertisements));
         }
 
-        private void Upload (int i,FileStream stream,CreateSmartphoneViewModel model)
+        private void Upload(int i,FileStream stream, CreateAdvertisementViewModel model)
         {
-            
                 switch (i)
                 {
                     case 1:
@@ -218,75 +184,67 @@ namespace Smartphone.Web.Controllers
                     case 2:
                          model.Image2.CopyTo(stream);
                         break;
-                    case 3:
-                         model.Image3.CopyTo(stream);
-                        break;
-                    case 4:
-                         model.Image4.CopyTo(stream);
-                        break;
-                    case 5:
-                         model.Image5.CopyTo(stream);
-                        break;
                     default: break;
-                
-
             }
         }
 
-        public IActionResult CurrentUserAdvertisement()
+        public IActionResult CurrentUserAdvertisements()
         {
-           var telephones =  service.MyUploadedSmartphones();
-            return View(telephones);
+           var advertisements =  service.MyUploadedAdvertisements();
+            return View(advertisements);
         }
 
         public IActionResult Details(int id)
         {
-            var smartphone = service.GetSmartphoneById(id);
+            var advertisement = service.GetAdvertisementById(id);
             
-            if (smartphone == null)
+            if (advertisement == null)
             {
                 return NotFound();
             }
 
-            return View(smartphone);
+            return View(advertisement);
         }
+
         [HttpPost]
-        public IActionResult EditById(int id, CreateSmartphoneViewModel model)
+        public IActionResult EditById(int id, CreateAdvertisementViewModel model)
         {
-            service.Edit(id, model.Description, model.Price, model.NameOfAdvertisement);
-            return RedirectToAction(nameof(CurrentUserAdvertisement));
+            service.Edit(id, model.Description, model.Price, model.Name);
+            return RedirectToAction(nameof(CurrentUserAdvertisements));
         }
 
         public IActionResult EditById(int id)
         {
-            var telephone = service.EditById(id);
-            if(telephone==null)
+            var advertisement = service.EditById(id);
+
+            if(advertisement == null)
             {
                 return NotFound();
             }
-            return View(new CreateSmartphoneViewModel
+
+            return View(new CreateAdvertisementViewModel
             {
-                NameOfAdvertisement = telephone.NameOfAdvertisement,
-                Price = telephone.Price,
-                Description = telephone.Description
+                Name = advertisement.Name,
+                Price = advertisement.Price,
+                Description = advertisement.Description
             });
         }
 
         public IActionResult Destroy(int id) => View(id);
 
-        public IActionResult DeletingSmartphone(int id)
+        public IActionResult DeletingAdvertisement(int id)
         {
-
-            service.DeleteSmartphone(id);
+            service.DeleteAdvertisement(id);
             return RedirectToAction(nameof(Index));
         }
 
-        public IActionResult ShowSmartphoneByMake(int id)
+        public IActionResult ShowAdvertisementByMake(int id)
         {
-            var telephones = service.ShowSmartphoneByMake(id);
-            return View(telephones);
+            var advertisements = service.ShowAdvertisementByMake(id);
+            return View(advertisements);
         }
         
+        [Authorize]
         public IActionResult Search()
         {
             var makes = service.GetMakes();
@@ -294,16 +252,12 @@ namespace Smartphone.Web.Controllers
             ViewBag.Makes = makes;
             return View();
         }
-         [HttpPost]
-        public IActionResult Search( SmartphoneSearchModell model)
+
+        [HttpPost]
+        public IActionResult Search( AdvertisementSearchModell model)
         {
-            var telephone = service.GetTelephones(model);
-            return View("Result",telephone);
+            var advertisements = service.GetAdvertisementsBySearch(model);
+            return View("Result", advertisements);
         }
-        
-
-
-
-
     }
 }

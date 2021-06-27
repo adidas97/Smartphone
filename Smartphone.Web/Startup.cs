@@ -1,20 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Smartphone.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Smartphone.Data.Models;
 using Smartphone.Services.IServices;
 using Smartphone.Services.ServicesImplementation;
+using Smartphone.Data.Models;
 
 namespace Smartphone.Web
 {
@@ -30,7 +25,7 @@ namespace Smartphone.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddTransient<ICreateSmartphoneService,CreateSmartphoneService>();
+            services.AddTransient<ISmartphoneService, SmartphoneService>();
             services.AddTransient<IUserService,UserService>();
             services.AddTransient<IHttpContextAccessor, HttpContextAccessor>();
             services.AddHttpContextAccessor();
@@ -54,7 +49,7 @@ namespace Smartphone.Web
             services.AddDbContext<SmartphoneDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<ApplicationUser>()
+            services.AddDefaultIdentity<User>()
                 .AddEntityFrameworkStores<SmartphoneDbContext>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
@@ -84,7 +79,7 @@ namespace Smartphone.Web
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=Smartphone}/{action=Index}/{id?}");
             });
         }
     }

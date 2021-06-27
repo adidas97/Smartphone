@@ -1,33 +1,17 @@
 ﻿@using Smartphone.Data.Models
 
-@model Telephone
+@model Advertisement
 @{
     ViewData["Title"] = "Details";
 }
-
-
-<h1>Name - @Model.NameOfAdvertisement</h1>
+<h1>Name - @Model.Name</h1>
 <h2>Price - @Model.Price</h2>
 <h3>Description:</h3>
 <h4>@Model.Description</h4>
-<h5>Model Year - @Model.ModelYear</h5>
-<h5>Network - @Model.Network</h5>
-<h5>Battery - @Model.Battery</h5>
-<h5>Capacity of Battery - @Model.CapacityOfBattery maH</h5>
-<h5>2 sim cards - @Model.HasTwoSim</h5>
-<h5>Type Sim - @Model.TypeOfSim</h5>
-<h5>Width - @Model.Width mm</h5>
-<h5>Thickness - @Model.Thickness mm</h5>
-<h5>Height - @Model.Height mm</h5>
-<h5>Weight - @Model.Weight</h5>
-<h5>Ram - @Model.RAM GB</h5>
-<h5>Memory - @Model.BuiltInMemory GB</h5>
-<h5>Slot for memory - @Model.SlotForMemory</h5>
-<h5>Processor - @Model.Processor</h5>
-<h5>Size in Inches - @Model.SizeInInches "</h5>
-<h5>Front Camera - @Model.FrontCamera MP</h5>
-<h5>Back Camera - @Model.BackCamera</h5>
-<h5>Finger Touch - @Model.HasFinger</h5>
+<h5>Model Year - @Model.Model.ModelYear</h5>
+<h5>Ram - @Model.Model.RAM GB</h5>
+<h5>Memory - @Model.Model.Memory GB</h5>
+<h5>Back Camera - @Model.Model.BasicCamera</h5>
 
 @if (Model.Image1 == true)
 {
@@ -36,18 +20,6 @@
 @if (Model.Image2 == true)
 {
     <img src="~/files/@Model.UserId/@Model.MakeId/@Model.ModelId/2.jpg" width="300" height="300"/>
-}
-@if (Model.Image3 == true)
-{
-    <img src="~/files/@Model.UserId/@Model.MakeId/@Model.ModelId/3.jpg" width="300" height="300"/>
-}
-@if (Model.Image4 == true)
-{
-    <img src="~/files/@Model.UserId/@Model.MakeId/@Model.ModelId/4.jpg" width="300" height="300" />
-}
-@if (Model.Image5 == true)
-{
-    <img src="~/files/@Model.UserId/@Model.MakeId/@Model.ModelId/5.jpg" width="300" height="300"/>
 }
 
 <h1>Contact:</h1>

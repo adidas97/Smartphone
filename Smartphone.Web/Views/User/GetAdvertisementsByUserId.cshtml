@@ -1,0 +1,55 @@
+﻿@using Smartphone.Data.Models
+@model List<Advertisement>
+
+@{
+    ViewData["Title"] = "Advertisements";
+}
+
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                Price
+            </th>
+            <th>
+                Make
+            </th>
+            <th>
+                Model
+            </th>
+            <th>
+                Option
+            </th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+
+                <th>
+
+                    @item.Name
+                </th>
+                <th>
+                    @item.Price
+                </th>
+                <th>
+                    @item.Make.Name
+                </th>
+                <th>
+                    @item.Model.Name
+                </th>
+
+                <th>
+                    <a href="/smartphone/details/@item.Id">Check</a>
+                </th>
+            </tr>
+        }
+    </tbody>
+
+</table>

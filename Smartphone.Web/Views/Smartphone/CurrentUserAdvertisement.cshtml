@@ -1,10 +1,9 @@
 ﻿@using Smartphone.Data.Models
-@model List<Telephone>
+@model List<Advertisement>
 
 @{
     ViewData["Title"] = "MySmartphones";
 }
-
 <table class="table table-bordered table-hover">
     <thead>
         <tr>
@@ -30,29 +29,24 @@
         @foreach (var item in Model)
         {
         <tr>
-
             <th>
-
-                @item.NameOfAdvertisement
+                @item.Name
             </th>
             <th>
                 @item.Price
             </th>
             <th>
-                @item.Make.NameOfMake
+                @item.Make.Name
             </th>
             <th>
-                @item.Model.NameOfModel
+                @item.Model.Name
             </th>
-
             <th>
                 <a href="/smartphone/details/@item.Id">Check</a>
                 <a href="/smartphone/editbyid/@item.Id" class="btn-warning">Edit</a>
                 <a href="/smartphone/destroy/@item.Id" class="btn-danger">Delete</a>
-            
             </th>
         </tr>
         }
     </tbody>
-
 </table>

@@ -1,0 +1,55 @@
+﻿@model CreateAdvertisementViewModel
+@{
+    ViewData["Title"] = "CreateAdvertisement";
+}
+
+<form method="post" enctype="multipart/form-data">
+
+    <select id="MakeId" asp-for="MakeId" asp-items='@(new SelectList(ViewBag.Makes,"MakeId","Name"))'>
+        <option>Select Make</option>
+    </select>
+
+    <select id="ModelId" asp-for="ModelId" asp-items='@(new SelectList(string.Empty,"ModelId","Name"))'></select>
+
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script>
+        $(function () {
+            $("#MakeId").change(function () {
+
+                var url = "/Smartphone/GetModels";
+                var ddlsource = "#MakeId";
+                $.getJSON(url, { MakeId: $(ddlsource).val() }, function (data) {
+                    var items = '';
+                    $("#ModelId").empty();
+                    $.each(data, function (i, row) {
+                        items += "<option value='" + row.value + "'>" + row.text + "</option>";
+                    });
+                    $("#ModelId").html(items);
+                })
+            });
+        });
+    </script>
+    <div
+    <label asp-for="Name"></label>
+    <input asp-for="Name" />
+    </div>
+    <div
+    <label asp-for="Price"></label>
+  <input asp-for="Price" />
+    </div>
+
+    <div>
+        <label asp-for="Image1"></label>
+        <input type="file" asp-for="Image1" />
+    </div>
+    
+        <label asp-for="Image2"></label>
+        <input type="file" asp-for="Image2" />
+    
+    <label asp-for="Description"></label>
+    <textarea asp-for="Description"> </textarea>
+
+    <input type="submit" value="Create" />
+
+</form>
+

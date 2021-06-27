@@ -1,18 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Smartphone.Data.Models;
 
 namespace Smartphone.Data
 {
-    public class SmartphoneDbContext : IdentityDbContext<ApplicationUser>
+    public class SmartphoneDbContext : IdentityDbContext<User>
     {
-        public DbSet<Telephone> Telephones { get; set; }
+        public DbSet<Advertisement> Advertisements { get; set; }
         public DbSet<Make> Makes { get; set; }
         public DbSet<Model> Models { get; set; }
-        public DbSet<Charachteristic> Charachteristics { get; set; }
 
         public SmartphoneDbContext(DbContextOptions<SmartphoneDbContext> options)
             : base(options)
@@ -29,9 +25,9 @@ namespace Smartphone.Data
                 .WithMany(e => e.Models)
                 .HasForeignKey(e => e.MakeId);
 
-            builder.Entity<Telephone>()
+            builder.Entity<Advertisement>()
                 .HasOne(e => e.User)
-                .WithMany(e => e.Telephones)
+                .WithMany(e => e.Advertisements)
                 .HasForeignKey(e => e.UserId);
         }
     }

@@ -1,13 +1,13 @@
 ﻿@using Smartphone.Data.Models
-@model IQueryable<Telephone>
+@model IQueryable<Advertisement>
 
 @{
-    ViewData["Title"] = "MySmartphones";
-}
+            ViewData["Title"] = "MySmartphones";
+        }
 
-@if (Model.Count() == 0)
+        @if (Model.Count() == 0)
 {
-    <h1>nqma namereni</h1>
+    <h1> Not Found </h1>
 }
 else
 {
@@ -36,21 +36,21 @@ else
     <tbody>
         
         @foreach (var item in Model)
-        {
+    {
             <tr>
 
                 <th>
 
-                    @item.NameOfAdvertisement
+                    @item.Name
                 </th>
                 <th>
                     @item.Price
                 </th>
                 <th>
-                    @item.Make.NameOfMake
+                    @item.Make.Name
                 </th>
                 <th>
-                    @item.Model.NameOfModel
+                    @item.Model.Name
                 </th>
 
                 <th>

@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
 
 namespace Smartphone.Data.Models
 {
@@ -10,8 +8,8 @@ namespace Smartphone.Data.Models
         [Key]
         public int MakeId { get; set; }
 
-        public string NameOfMake { get; set; }
+        public string Name { get; set; }
 
-       public ICollection<Model> Models { get; set; }
+        public List<Model> Models { get; set; }
     }
 }
